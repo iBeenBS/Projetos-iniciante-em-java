@@ -1,0 +1,122 @@
+import java.util.Scanner;
+import java.util.Random;
+import java.util.HashMap;
+
+public class Main {
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        HashMap<String, Integer> idade = new HashMap<>();
+
+        boolean continuarPrograma = true;
+
+        while (continuarPrograma) {
+            System.out.println("\n\nProjeto: utilizando o que aprendi.\n");
+
+            try {
+                Thread.sleep(2000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("Tempo para enviar esta mensagem: 2 segundos\n");
+
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            Random gerador = new Random();
+            int numero = gerador.nextInt(10) + 1;
+            int numero2 = gerador.nextInt(10) + 1;
+
+            System.out.println("Seu número: " + numero);
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            if (numero > 5) {
+                System.out.println("Seu número é maior que 5, então esta mensagem aparece.");
+            } else {
+                System.out.println("Seu número é menor que 5, então essa mensagem aparece.");
+            }
+
+            try {
+                Thread.sleep(100);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            System.out.println("Você deseja mudar de número? sim/nao");
+            String resposta = scanner.nextLine().trim().toLowerCase();
+
+            if (resposta.equals("sim")) {
+                System.out.println("Seu novo número é: " + numero2);
+            } else {
+                System.out.println("Seu número ainda continua sendo " + numero);
+            }
+
+            // Adicionando algumas idades padrão
+            idade.put("Joao", 15);
+            idade.put("Gabriel", 16);
+            idade.put("Maria", 15);
+            idade.put("Veronica", 16);
+            idade.put("tete", 16);
+            idade.put("francesco", 16);
+
+            System.out.println("Você quer saber sua idade? sim/nao");
+            String saber = scanner.nextLine().trim().toLowerCase();
+
+            if (saber.equals("sim")) {
+                System.out.println("Digite seu nome:");
+                String seuNome = scanner.nextLine().trim();
+                Integer suaIdade = idade.get(seuNome);
+                if (suaIdade != null) {
+                    System.out.println("Sua idade: " + suaIdade + " anos.");
+                } else {
+                    System.out.println("Não encontramos sua idade.");
+                }
+            } else {
+                System.out.println("Está bem!");
+            }
+
+            System.out.println("\n\nEscolha um nome para dizermos a idade:");
+            String nome = scanner.nextLine().trim();
+
+            if (idade.containsKey(nome)) {
+                System.out.println("Idade de " + nome + ": " + idade.get(nome) + " anos.");
+            } else {
+                System.out.println("Não encontramos a idade desse nome, deseja informar a idade? sim/nao");
+                String adicionar = scanner.nextLine().trim().toLowerCase();
+
+                if (adicionar.equals("sim")) {
+                    System.out.println("Digite a idade de " + nome + ":");
+                    int novaIdade = scanner.nextInt();
+                    scanner.nextLine();
+                    idade.put(nome, novaIdade);
+                    System.out.println("Idade de " + nome + " adicionada com sucesso!");
+                } else {
+                    System.out.println("Ok, idade não adicionada.");
+                }
+            }
+
+            System.out.println("\n\nLista dos atuais nomes existentes:");
+            for (String chave : idade.keySet()) {
+                System.out.println(chave + ": " + idade.get(chave) + " anos");
+            }
+
+            System.out.println("\n\nDeseja voltar ao início? sim/nao");
+            String continuar = scanner.nextLine().trim().toLowerCase();
+
+            if (!continuar.equals("sim")) {
+                continuarPrograma = false;
+                System.out.println("Encerrando o programa. Até mais!");
+            }
+        }
+
+        scanner.close();
+    }
+}
